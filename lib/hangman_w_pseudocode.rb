@@ -15,10 +15,14 @@
 # display_incorrect_guess_count         Game
 
 class Game
-  attr_reader :solution, :correct_guesses_array
+  attr_reader :solution, :correct_guesses_array, :incorrect_guesses_array
+  attr_accessor :incorrects_allowed
+
   def initialize
     @solution = pick_random_word
     @correct_guesses_array = make_blank_array([])
+    @incorrect_guesses_array = []
+    @incorrects_allowed = 6
   end
 
   def pick_random_word
@@ -48,29 +52,42 @@ class Game
     correct_indices = (0 ... solution.length).find_all { |i| solution[i,1] == letter_guess }
 
     if correct_indices.length > 0
-      display_correct_letter(letter_guess, correct_indices)
+      insert_correct_letter(letter_guess, correct_indices)
     else
-      display_incorrect_letter(letter_guess)
+      insert_incorrect_letter(letter_guess)
     end
   end
 
 
-  def display_correct_letter(letter, indices)
+  def insert_correct_letter(letter, indices)
     #puts "DEVELOPMENT...displaying correct letter...#{correct_letter} "
     #need array with _s for solution.length+1
     #replace(gsub?) correct_letter with _ at indices revealed by correct_indices
 
     indices.each { |i| correct_guesses_array[i] = letter }
     #add correct_letter to correct_guesses_array
-    p correct_guesses_array
+
   end
 
-  def display_incorrect_letter(incorrect_letter)
-    puts "DEVELOPMENT...displaying incorrect letter...#{incorrect_letter}"
+  def insert_incorrect_letter(incorrect_letter)
+
+    self.incorrects_allowed -= 1
+    incorrect_guesses_array << incorrect_letter
+
+
     #need incorrect_guesses_array
     #add incorrect_letter to incorrect_guesses_array
 
     #can use incorrect_guesses_array along with correct_guesses_array to check for valid user input, add that logic to get_guess
+  end
+
+  def display_corrects
+    p correct_guesses_array
+  end
+
+  def display_incorrects
+    puts  "Not in the word: #{incorrect_guesses_array}"
+    puts  "Incorrects allowed: #{incorrects_allowed}"
   end
 
 end
@@ -81,13 +98,21 @@ puts hangman.solution
 #empty_array = []
 #blank_array = hangman.make_blank_array(empty_array)
 #p blank_array
-p hangman.correct_guesses_array
+
 
 
 while true
+  hangman.display_corrects
+  hangman.display_incorrects
   hangman.prompt_for_guess
   hangman.get_guess
-  break if hangman.correct_guesses_array.include?('_') == false
+  if hangman.correct_guesses_array.include?('_') == false
+    puts "You got it!"
+    break
+  elsif hangman.incorrects_allowed == 0
+    puts "Sorry! It's a hangman!"
+    break
+  end
 end
 
 

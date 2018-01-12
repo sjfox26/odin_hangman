@@ -15,9 +15,10 @@
 # display_incorrect_guess_count         Game
 
 class Game
-  attr_reader :solution
+  attr_reader :solution, :correct_guesses_array
   def initialize
     @solution = pick_random_word
+    @correct_guesses_array = make_blank_array([])
   end
 
   def pick_random_word
@@ -59,12 +60,9 @@ class Game
     #need array with _s for solution.length+1
     #replace(gsub?) correct_letter with _ at indices revealed by correct_indices
 
-    array = []
-    make_blank_array(array)
-
-    indices.each { |i| array[i] = letter }
+    indices.each { |i| correct_guesses_array[i] = letter }
     #add correct_letter to correct_guesses_array
-    p array
+    p correct_guesses_array
   end
 
   def display_incorrect_letter(incorrect_letter)
@@ -80,15 +78,16 @@ end
 hangman = Game.new
 puts hangman.solution
 
-empty_array = []
-blank_array = hangman.make_blank_array(empty_array)
-p blank_array
-
+#empty_array = []
+#blank_array = hangman.make_blank_array(empty_array)
+#p blank_array
+p hangman.correct_guesses_array
 
 
 while true
   hangman.prompt_for_guess
   hangman.get_guess
+  break if hangman.correct_guesses_array.include?('_') == false
 end
 
 

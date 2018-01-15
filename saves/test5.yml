@@ -1,0 +1,13 @@
+--- !ruby/object:Game
+solution: unread
+correct_guesses_array:
+- u
+- n
+- _
+- _
+- _
+- _
+incorrect_guesses_array:
+- y
+- x
+incorrects_allowed: 4

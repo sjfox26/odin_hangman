@@ -65,9 +65,6 @@ class Game
     puts  "Incorrects allowed: #{incorrects_allowed}"
   end
 
-  def to_s
-    "In Game:\n #{@solution}, #{@correct_guesses_array}, #{@incorrect_guesses_array}, #{@incorrects_allowed}\n"
-  end
 
   def save_game
     puts "Enter a name so you can retrieve your saved game later:"
@@ -90,11 +87,22 @@ class Game
     end
   end
 
+  def display_saved_list
+    puts "Saved games list:"
+    Dir.foreach('./saves') do |save_name|
+      next if save_name == '.' or save_name == '..'
+      puts "#{save_name}"
+    end
+  end
+
 
 end
 
 
 hangman = Game.new
+
+puts hangman.display_saved_list
+
 puts hangman.solution
 
 hangman.display_corrects

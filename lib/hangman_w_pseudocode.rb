@@ -90,6 +90,7 @@ class Game
     puts  "Incorrects allowed: #{incorrects_allowed}"
   end
 
+
 end
 
 hangman = Game.new

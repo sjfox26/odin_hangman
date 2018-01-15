@@ -1,0 +1,12 @@
+--- !ruby/object:Game
+solution: whack
+correct_guesses_array:
+- w
+- _
+- _
+- _
+- k
+incorrect_guesses_array:
+- o
+- p
+incorrects_allowed: 4

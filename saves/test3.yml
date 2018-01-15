@@ -1,0 +1,18 @@
+--- !ruby/object:Game
+solution: maidservant
+correct_guesses_array:
+- m
+- _
+- _
+- _
+- s
+- _
+- _
+- _
+- _
+- _
+- _
+incorrect_guesses_array:
+- x
+- u
+incorrects_allowed: 4

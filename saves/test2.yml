@@ -1,0 +1,14 @@
+--- !ruby/object:Game
+solution: traitor
+correct_guesses_array:
+- t
+- _
+- a
+- _
+- t
+- _
+- _
+incorrect_guesses_array:
+- x
+- v
+incorrects_allowed: 4

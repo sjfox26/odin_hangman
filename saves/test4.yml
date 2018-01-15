@@ -1,0 +1,19 @@
+--- !ruby/object:Game
+solution: perverseness
+correct_guesses_array:
+- p
+- _
+- _
+- _
+- _
+- _
+- s
+- _
+- _
+- _
+- s
+- s
+incorrect_guesses_array:
+- x
+- c
+incorrects_allowed: 4

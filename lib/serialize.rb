@@ -83,8 +83,7 @@ class Game
     puts "What name did you save your game as?"
     begin
       filename = gets.chomp.downcase
-      game = YAML.load_file("saves/#{filename}.yml")
-      game.play
+      YAML.load_file("saves/#{filename}.yml")
     rescue
       puts "No saved files with that name. Try again:"
       retry
@@ -122,6 +121,24 @@ hangman.save_game
 
 
 hangman.load_game
+puts "loaded saved game!"
+
+hangman.display_corrects
+hangman.display_incorrects
+hangman.prompt_for_guess
+hangman.get_guess
+
+hangman.display_corrects
+hangman.display_incorrects
+hangman.prompt_for_guess
+hangman.get_guess
+
+hangman.display_corrects
+hangman.display_incorrects
+hangman.prompt_for_guess
+hangman.get_guess
+
+
 
 #puts "Oh you want to continue playing?  Here's the game I saved for you"
 

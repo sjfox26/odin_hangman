@@ -1,8 +1,8 @@
 require "yaml"
 
 class Game
-  attr_reader :solution, :correct_guesses_array, :incorrect_guesses_array
-  attr_accessor :incorrects_allowed
+  attr_reader :incorrect_guesses_array
+  attr_accessor :incorrects_allowed, :solution, :correct_guesses_array
 
   def initialize
     @solution = pick_random_word

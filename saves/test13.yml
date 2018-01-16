@@ -1,0 +1,16 @@
+--- !ruby/object:Game
+solution: inessential
+correct_guesses_array:
+- i
+- n
+- e
+- _
+- _
+- e
+- n
+- _
+- i
+- _
+- _
+incorrect_guesses_array: []
+incorrects_allowed: 6

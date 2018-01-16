@@ -1,0 +1,14 @@
+--- !ruby/object:Game
+solution: prenotify
+correct_guesses_array:
+- p
+- r
+- _
+- n
+- _
+- _
+- _
+- _
+- _
+incorrect_guesses_array: []
+incorrects_allowed: 6

@@ -1,0 +1,15 @@
+--- !ruby/object:Game
+solution: luddite
+correct_guesses_array:
+- l
+- _
+- d
+- d
+- _
+- t
+- _
+incorrect_guesses_array:
+- x
+- z
+- y
+incorrects_allowed: 3

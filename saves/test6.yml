@@ -1,0 +1,12 @@
+--- !ruby/object:Game
+solution: ratty
+correct_guesses_array:
+- r
+- _
+- t
+- t
+- _
+incorrect_guesses_array:
+- f
+- x
+incorrects_allowed: 4

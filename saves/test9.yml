@@ -1,0 +1,17 @@
+--- !ruby/object:Game
+solution: digitally
+correct_guesses_array:
+- d
+- _
+- g
+- _
+- t
+- a
+- l
+- l
+- _
+incorrect_guesses_array:
+- x
+- p
+- u
+incorrects_allowed: 3

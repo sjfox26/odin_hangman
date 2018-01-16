@@ -1,0 +1,13 @@
+--- !ruby/object:Game
+solution: quaver
+correct_guesses_array:
+- q
+- _
+- _
+- v
+- _
+- _
+incorrect_guesses_array:
+- x
+- b
+incorrects_allowed: 4

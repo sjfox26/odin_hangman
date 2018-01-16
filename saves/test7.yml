@@ -1,0 +1,12 @@
+--- !ruby/object:Game
+solution: hwang
+correct_guesses_array:
+- h
+- w
+- _
+- _
+- _
+incorrect_guesses_array:
+- x
+- t
+incorrects_allowed: 4

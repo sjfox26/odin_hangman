@@ -6,7 +6,7 @@ class Game
 
   def initialize
     @solution = pick_random_word
-    @correct_guesses_array = make_blank_array([])
+    @correct_guesses_array = make_blanks_array([])
     @incorrect_guesses_array = []
     @incorrects_allowed = 6
   end
@@ -15,7 +15,7 @@ class Game
     File.open("lib/5desk.txt").readlines.collect { |word| word.strip.downcase }.select { |word| word.length > 4 && word.length < 13 }.sample#.split("")
   end
 
-  def make_blank_array(input_array)
+  def make_blanks_array(input_array)
     i = 0
     while i < solution.length
       input_array << "_"
@@ -25,12 +25,18 @@ class Game
   end
 
 
-  def prompt_for_guess
+  def prompt_for_input
     puts "Type in your letter guess!"
   end
 
-  def get_guess(guess = gets.chomp)
-    check_guess(guess)
+  def get_input(input = gets.chomp)
+    if input == 'save'
+      save_game
+    elsif input == 'load'
+      load_game
+    else
+      check_guess(input)
+    end
   end
 
   #https://stackoverflow.com/questions/1819540/return-index-of-all-occurrences-of-a-character-in-a-string-in-ruby
@@ -74,13 +80,16 @@ class Game
       file.write(YAML.dump(self))
     end
     puts "Game saved. The names of saved games can be located in the 'saves' folder"
+    exit
   end
 
+
   def load_game
-    puts "What name did you save your game as?"
+    puts "What name did you use to save your game?"
     begin
       filename = gets.chomp.downcase
-      YAML.load_file("saves/#{filename}.yml")
+      new_game = YAML.load_file("saves/#{filename}.yml")
+      new_game.play
     rescue
       puts "No saved files with that name. Try again:"
       retry
@@ -88,10 +97,31 @@ class Game
   end
 
   def display_saved_list
-    puts "Saved games list:"
+    puts "Here is the current list of saved games:"
     Dir.foreach('./saves') do |save_name|
       next if save_name == '.' or save_name == '..'
-      puts "#{save_name}"
+      name_no_dot_yml = save_name.sub /\.[^.]+\z/, ""
+      puts "#{name_no_dot_yml}"
+    end
+  end
+
+  def play
+    #puts "at any point, type 'save' to save the game at current point"  / INSTRUCTIONS
+    #implement 'save' logic
+
+    while true
+      display_corrects
+      display_incorrects
+      prompt_for_input
+      get_input
+      if correct_guesses_array.include?('_') == false
+        puts "You got it! You're a real wordsmith!"
+        break
+      elsif incorrects_allowed == 0
+        puts "Sorry! It's a hangman!"
+        puts "The word was #{solution}!"
+        exit
+      end
     end
   end
 
@@ -100,59 +130,16 @@ end
 
 
 hangman = Game.new
-
-puts hangman.display_saved_list
-
+hangman.display_saved_list
 puts hangman.solution
 
-hangman.display_corrects
-hangman.prompt_for_guess
-hangman.get_guess
-hangman.display_corrects
-hangman.display_incorrects
-hangman.prompt_for_guess
-hangman.get_guess
-hangman.display_corrects
-hangman.display_incorrects
-hangman.prompt_for_guess
-hangman.get_guess
-hangman.display_corrects
-hangman.display_incorrects
-hangman.prompt_for_guess
-hangman.get_guess
-hangman.display_corrects
-hangman.display_incorrects
-
-puts "now to serialize and save..."
-
-hangman.save_game
-
-
-hangman.load_game
-puts "loaded saved game!"
-
-hangman.display_corrects
-hangman.display_incorrects
-hangman.prompt_for_guess
-hangman.get_guess
-
-hangman.display_corrects
-hangman.display_incorrects
-hangman.prompt_for_guess
-hangman.get_guess
-
-hangman.display_corrects
-hangman.display_incorrects
-hangman.prompt_for_guess
-hangman.get_guess
+hangman.play
 
 
 
-#puts "Oh you want to continue playing?  Here's the game I saved for you"
 
-#puts YAML::load(hangman)
 
-#hangman.display_corrects
-#hangman.prompt_for_guess
-#hangman.get_guess
+
+
+
 

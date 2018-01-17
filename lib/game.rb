@@ -66,7 +66,7 @@ class Game
   end
 
   def display_corrects
-    p correct_guesses_array
+    p correct_guesses_array.join(' ')
   end
 
   def display_incorrects
@@ -110,6 +110,7 @@ class Game
 
   def check_for_game_end
     if correct_guesses_array.include?('_') == false
+      display_corrects
       puts "You got it! You're a real wordsmith!"
       exit
     elsif incorrects_allowed == 0

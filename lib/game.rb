@@ -24,6 +24,9 @@ class Game
     input_array
   end
 
+  def welcome
+    puts "Welcome to hangman!  At any point, you can type 'save' to save your current game, or 'load' to load a previously saved game."
+  end
 
   def prompt_for_input
     puts "Type in your letter guess!"
@@ -108,6 +111,7 @@ class Game
   def play
     #puts "at any point, type 'save' to save the game at current point"  / INSTRUCTIONS
     #implement 'save' logic
+    welcome
 
     while true
       display_corrects

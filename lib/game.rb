@@ -108,6 +108,17 @@ class Game
     end
   end
 
+  def check_for_game_end
+    if correct_guesses_array.include?('_') == false
+      puts "You got it! You're a real wordsmith!"
+      exit
+    elsif incorrects_allowed == 0
+      puts "Sorry! It's a hangman!"
+      puts "The word was #{solution}!"
+      exit
+    end
+  end
+
   def play
     #puts "at any point, type 'save' to save the game at current point"  / INSTRUCTIONS
     #implement 'save' logic
@@ -118,14 +129,7 @@ class Game
       display_incorrects
       prompt_for_input
       get_input
-      if correct_guesses_array.include?('_') == false
-        puts "You got it! You're a real wordsmith!"
-        break
-      elsif incorrects_allowed == 0
-        puts "Sorry! It's a hangman!"
-        puts "The word was #{solution}!"
-        exit
-      end
+      check_for_game_end
     end
   end
 
@@ -133,8 +137,8 @@ class Game
 end
 
 
-#hangman = Game.new
+hangman = Game.new
 #hangman.display_saved_list
-#puts hangman.solution
+puts hangman.solution
 
-#hangman.play
+hangman.play

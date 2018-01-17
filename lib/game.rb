@@ -89,13 +89,14 @@ class Game
 
   def load_game
     puts "What name did you use to save your game?"
+    retries ||= 0
     begin
       filename = gets.chomp.downcase
       new_game = YAML.load_file("saves/#{filename}.yml")
       new_game.play
     rescue
-      puts "No saved files with that name. Try again:"
-      retry
+      puts "No saved files with that name. After two unsuccessful attempts, you will be redirected to the active game."
+      retry if (retries += 1) < 2
     end
   end
 

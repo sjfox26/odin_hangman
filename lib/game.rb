@@ -43,8 +43,13 @@ class Game
   end
 
   #https://stackoverflow.com/questions/1819540/return-index-of-all-occurrences-of-a-character-in-a-string-in-ruby
+  def check_for_correct_indices(letter)
+    indices = (0 ... solution.length).find_all { |i| solution[i,1] == letter }
+    return indices
+  end
+
   def check_guess(letter_guess)
-    correct_indices = (0 ... solution.length).find_all { |i| solution[i,1] == letter_guess }
+    correct_indices = check_for_correct_indices(letter_guess)
 
     if correct_indices.length > 0
       insert_correct_letter(letter_guess, correct_indices)
@@ -62,7 +67,7 @@ class Game
     self.incorrects_allowed -= 1
     incorrect_guesses_array << incorrect_letter
 
-    #can use incorrect_guesses_array along with correct_guesses_array to check for valid user input, add that logic to get_guess
+    #can use incorrect_guesses_array along with correct_guesses_array to check for valid user input, add that logic to get_guess?
   end
 
   def display_corrects
@@ -139,8 +144,8 @@ class Game
 end
 
 
-hangman = Game.new
+#hangman = Game.new
 #hangman.display_saved_list
-puts hangman.solution
+#puts hangman.solution
 
-hangman.play
+#hangman.play

@@ -54,4 +54,99 @@ RSpec.describe Game do
     end
   end
 
+  context "#check_for_correct_indices" do
+    it 'returns the correct index of included letter when one occurence' do
+      game = Game.new
+      allow(game).to receive(:solution).and_return('copperfield')
+
+      expect(game.check_for_correct_indices('r')).to eq([5])
+    end
+
+    it 'returns the correct indices of included letter when multiple occurences' do
+      game = Game.new
+      allow(game).to receive(:solution).and_return('traddles')
+
+      expect(game.check_for_correct_indices('d')).to eq([3, 4])
+    end
+
+    it 'returns the correct indices of included letter when lots of occurences' do
+      game = Game.new
+      allow(game).to receive(:solution).and_return('mississippi')
+
+      expect(game.check_for_correct_indices('i')).to eq([1, 4, 7, 10])
+    end
+  end
+
+  context "#get_input" do
+    it 'results in correct_guesses_array being correctly updated if letter is in solution ' do
+      game = Game.new
+      allow(game).to receive(:solution).and_return('mississippi')
+      allow(game).to receive(:correct_guesses_array).and_return(["_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"])
+
+      game.get_input('s')
+      expect(game.correct_guesses_array).to eq(["_", "_", "s", "s", "_", "s", "s", "_", "_", "_", "_"])
+    end
+
+    it 'results in incorrect_guesses_array being correctly updated if letter is in solution ' do
+      game = Game.new
+      allow(game).to receive(:solution).and_return('mississippi')
+
+      game.get_input('x')
+      expect(game.incorrect_guesses_array).to eq(["x"])
+    end
+
+    it 'routes to save if user types in save ' do
+      game = Game.new
+
+      expect(game).to receive(:save_game)
+      game.get_input('save')
+    end
+
+    it 'routes to load if user types in load ' do
+      game = Game.new
+
+      expect(game).to receive(:load_game)
+      game.get_input('load')
+    end
+  end
+
+
+  #save
+
+  #load
+  # context "#load" do
+  #   it 'loads a saved game' do
+  #     game = Game.new
+  #     allow(game).to receive(:solution).and_return('mississippi')
+  #     allow(game).to receive(:correct_guesses_array).and_return(["_", "_", "s", "s", "_", "s", "s", "_", "_", "_", "_"])
+  #
+  #     filepath = "saves/test44.yml"
+  #
+  #     parsed_yaml = {
+  #         "incorrect_guesses_array": [],
+  #         "correct_guesses_array": [
+  #             "_",
+  #             "_",
+  #             "s",
+  #             "s",
+  #             "_",
+  #             "s",
+  #             "s",
+  #             "_",
+  #             "_",
+  #             "_",
+  #             "_"
+  #         ],
+  #         "solution": "mississippi",
+  #         "incorrects_allowed": 6
+  #     }
+  #
+  #     allow(YAML).to receive(:load_file).with(filepath).and_return(parsed_yaml)
+  #     allow(YAML).to receive(:file)
+  #
+  #     expect(game.load_game).to eq(parsed_yaml)
+  #
+  #   end
+  # end
+
 end
